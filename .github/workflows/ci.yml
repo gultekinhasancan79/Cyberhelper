@@ -23,6 +23,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Guard against committed Groq secrets
+        run: |
+          if grep -RInE --exclude-dir=.git 'gsk_[A-Za-z0-9_-]{20,}' .; then
+            echo "Potential Groq API key detected in repository content."
+            exit 1
+          fi
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -39,7 +46,7 @@ jobs:
           python - <<'PY'
           from groq import Groq
 
-          client = Groq(api_key="gsk_test_key_for_ci_only")
+          client = Groq(api_key="ci-placeholder-key")
           assert hasattr(client, "chat")
           assert hasattr(client.chat, "completions")
           assert hasattr(client.chat.completions, "create")
