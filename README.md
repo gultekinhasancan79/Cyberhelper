@@ -5,6 +5,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/gultekinhasancan79/Cyberhelper/actions/workflows/ci.yml"><img src="https://github.com/gultekinhasancan79/Cyberhelper/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/CustomTkinter-Desktop%20UI-1f6aa5" alt="CustomTkinter">
   <img src="https://img.shields.io/badge/Groq-API-F55036" alt="Groq API">
