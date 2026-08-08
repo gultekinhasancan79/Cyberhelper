@@ -33,3 +33,18 @@ jobs:
 
       - name: Verify runtime imports
         run: python -c "import customtkinter, groq; print('dependencies ok')"
+
+      - name: Verify Groq client surface
+        run: |
+          python - <<'PY'
+          from groq import Groq
+
+          client = Groq(api_key="gsk_test_key_for_ci_only")
+          assert hasattr(client, "chat")
+          assert hasattr(client.chat, "completions")
+          assert hasattr(client.chat.completions, "create")
+          print("Groq chat.completions client surface ok")
+          PY
+
+      - name: Import application module
+        run: python -c "import cyberhelper; print('application import ok')"
