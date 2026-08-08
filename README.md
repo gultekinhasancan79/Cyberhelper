@@ -107,6 +107,25 @@ The current implementation stores the configured API key locally inside `setting
 
 For a production-grade version, moving secrets to an OS credential manager such as Windows Credential Manager, macOS Keychain, or Secret Service on Linux would be preferable.
 
+## Testing
+
+The repository includes dependency-free `unittest` coverage for local persistence behavior. The current suite verifies:
+
+- favorites can be saved and loaded without changing their structure,
+- malformed favorites JSON falls back to an empty list rather than crashing the loader,
+- saving an API key preserves unrelated existing settings,
+- and a missing settings file is created with the expected key entry.
+
+The tests redirect `FAVORITES_FILE` and `SETTINGS_FILE` to temporary directories, so they exercise the production persistence functions without touching the user's real `~/.dolphin_ai/` directory.
+
+Run them locally with:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+GitHub Actions also verifies the pinned runtime dependencies, Groq client surface, application importability, Python compilation, and accidental Groq-key detection.
+
 ## Themes
 
 The current codebase defines theme profiles for:
@@ -136,7 +155,7 @@ Useful improvements for a future version include:
 
 - storing API credentials in the operating system's secure credential store,
 - separating UI, persistence, and model-client logic into smaller modules,
-- adding automated tests for settings/history behavior,
+- expanding tests to chat-history and export behavior,
 - validating configured model availability dynamically,
 - adding structured error handling around API failures,
 - and packaging the application as a standalone desktop release.
