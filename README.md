@@ -69,10 +69,12 @@ cd Cyberhelper
 pip install -r requirements.txt
 ```
 
-Current runtime dependencies are intentionally small:
+The repository currently pins the runtime versions exercised by CI:
 
-- `customtkinter>=5.2.0`
-- `groq>=0.4.0`
+- `customtkinter==5.2.2`
+- `groq==0.37.1`
+
+Dependency upgrades are intentionally reviewed through CI rather than silently changing a clean installation.
 
 ### 3. Run the application
 
