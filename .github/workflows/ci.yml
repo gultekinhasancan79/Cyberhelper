@@ -35,8 +35,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Compile application
-        run: python -m py_compile cyberhelper.py
+      - name: Compile application and tests
+        run: |
+          python -m py_compile cyberhelper.py
+          python -m py_compile tests/test_persistence.py
 
       - name: Verify runtime imports
         run: python -c "import customtkinter, groq; print('dependencies ok')"
@@ -55,3 +57,6 @@ jobs:
 
       - name: Import application module
         run: python -c "import cyberhelper; print('application import ok')"
+
+      - name: Run persistence unit tests
+        run: python -m unittest discover -s tests -v
